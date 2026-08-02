@@ -46,7 +46,7 @@ Develop SQL-based analytics to deliver detailed insights into:
 
 #### For more details, refer to docs/requirements.md.
 
-### 📂 Repository Structure
+📂 Repository Structure
 data-warehouse-project/
 │
 ├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
