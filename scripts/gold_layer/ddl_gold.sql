@@ -71,7 +71,7 @@ WITH erp_customer_one_row AS
     /*
         Reduce the ERP customer source to one row per customer ID.
 
-        Your Silver checks may currently show no duplicate IDs. This grouping
+        my Silver checks may currently show no duplicate IDs. This grouping
         is still useful as a protection against future source duplicates.
 
         MAX is harmless when only one row exists.
@@ -272,7 +272,7 @@ category_one_row AS
     /*
         Reduce the category source to one row per category ID.
 
-        If your duplicate checks return zero rows, MAX simply returns the only
+        If my duplicate checks return zero rows, MAX simply returns the only
         available value.
     */
     SELECT
