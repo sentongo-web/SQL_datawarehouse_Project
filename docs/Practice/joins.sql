@@ -31,7 +31,7 @@ from Sales.Customers c
 left join Sales.Orders o
 on c.CustomerID = o.CustomerID
 
---use SalesDB
+use SalesDB
 --RIGHT JOIN 
 --Returns alll rows in the right table and only the matching data in the left table.
 --get all customers and their orders including orders without the matching customers
@@ -112,3 +112,25 @@ select
 	*
 from Sales.Customers c
 cross join Sales.Orders o
+
+--MULTIPLE JOINS
+--TASK: Retrieve a list of all orders along with the related customer, product and employee details for each order, display: 
+--Order id, customer name, product name, sales, price, sales person name
+
+select * from Sales.Customers;
+select * from Sales.Employees;
+select * from Sales.Orders;
+select * from Sales.OrdersArchive;
+select * from Sales.Products;
+
+SELECT 
+    o.OrderID,
+    c.FirstName AS customerFirstname,
+    p.Product AS productname,
+    o.Sales,
+    p.Price,
+    e.FirstName AS employeeName
+FROM Sales.Orders o
+LEFT JOIN Sales.Customers c ON o.CustomerID = c.CustomerID
+LEFT JOIN Sales.Products p ON o.ProductID = p.ProductID
+LEFT JOIN Sales.Employees e ON o.SalesPersonID = e.EmployeeID
