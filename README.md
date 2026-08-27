@@ -1,6 +1,6 @@
 # SQL Data Warehouse Project
 
-**Live write-up: [paulsentongo.dev](https://paulsentongo.dev)**
+**Live project link: https://sentongo-web.github.io/SQL_datawarehouse_Project/**
 
 A SQL Server data warehouse built from scratch on top of raw CRM and ERP exports. I built this as a portfolio project to show what I can actually do with SQL — not a toy exercise, but a full pipeline: raw ingestion, cleansing and standardization, a proper dimensional model, data quality tests, and analytics on top, all in T-SQL.
 
