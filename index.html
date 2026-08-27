@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Paul Sentongo — Data Engineer</title>
+<meta name="description" content="A SQL Server data warehouse built from scratch: CRM and ERP data consolidated through a Bronze/Silver/Gold pipeline into a star schema, with data quality tests and analytics on top. Portfolio project by Paul Sentongo." />
+<meta name="theme-color" content="#faf9f6" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Paul Sentongo — Data Engineer" />
+<meta property="og:description" content="A SQL Server data warehouse built with a Bronze/Silver/Gold medallion architecture: ETL, dimensional modeling, data quality checks and analytics, end to end." />
+<meta property="og:url" content="https://paulsentongo.dev" />
+<meta name="twitter:card" content="summary" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='20' width='28' height='6' rx='2' fill='%23b8763f'/%3E%3Crect x='5' y='13' width='22' height='6' rx='2' fill='%239a978d'/%3E%3Crect x='8' y='6' width='16' height='6' rx='2' fill='%23c99a2e'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;680&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="2" y="20" width="28" height="6" rx="2" fill="#b8763f"/>
+        <rect x="5" y="13" width="22" height="6" rx="2" fill="#9a978d"/>
+        <rect x="8" y="6" width="16" height="6" rx="2" fill="#c99a2e"/>
+      </svg>
+      Paul Sentongo
+    </a>
+
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#data-model">Data Model</a>
+      <a href="#engineering">Engineering</a>
+      <a href="#analytics">Analytics</a>
+      <a href="#explore">Repo</a>
+    </div>
+
+    <div class="nav-cta">
+      <a class="icon-btn gh-desktop" href="https://github.com/sentongo-web/SQL_datawarehouse_Project" target="_blank" rel="noopener" aria-label="View source on GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-panel">
+    <a href="#overview">Overview</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#data-model">Data Model</a>
+    <a href="#engineering">Engineering</a>
+    <a href="#analytics">Analytics</a>
+    <a href="#explore">Repo</a>
+    <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</nav>
+
+<main id="home">
+
+  <!-- ============================== HERO ============================== -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="eyebrow reveal">Data Engineering Portfolio Project</div>
+      <h1 class="reveal">I turn scattered CRM and ERP data into a warehouse people can actually trust.</h1>
+      <p class="lede reveal">
+        This is a SQL Server data warehouse I built end to end: raw CSV exports from two
+        disconnected source systems, cleaned and reconciled through a Bronze → Silver → Gold
+        pipeline, and modeled into a star schema ready for reporting. No frameworks, no
+        shortcuts — just T-SQL, a clear architecture, and a lot of attention to the details
+        that make a warehouse trustworthy.
+      </p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary" href="https://github.com/sentongo-web/SQL_datawarehouse_Project" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          View the code
+        </a>
+        <a class="btn btn-secondary" href="#data-model">
+          See the data model
+        </a>
+        <a class="btn btn-secondary" href="mailto:sentongopol@gmail.com">
+          Get in touch
+        </a>
+      </div>
+      <div class="stack-row reveal">
+        <span class="stack-pill">SQL Server / T-SQL</span>
+        <span class="stack-pill">Medallion Architecture</span>
+        <span class="stack-pill">Star Schema</span>
+        <span class="stack-pill">Stored Procedures</span>
+        <span class="stack-pill">Data Quality Testing</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats reveal">
+    <div class="container stats-grid">
+      <div class="stat">
+        <span class="n">2 → 1</span>
+        <span class="l">Source systems (CRM + ERP) consolidated into one model</span>
+      </div>
+      <div class="stat">
+        <span class="n">60K+</span>
+        <span class="l">Sales transactions processed through the pipeline</span>
+      </div>
+      <div class="stat">
+        <span class="n">3</span>
+        <span class="l">Layers — Bronze, Silver, Gold — each with a clear contract</span>
+      </div>
+      <div class="stat">
+        <span class="n">18K+</span>
+        <span class="l">Customer records cleaned, deduplicated and standardized</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== OVERVIEW ============================== -->
+  <section id="overview" class="section">
+    <div class="container">
+      <div class="overview-grid">
+        <div class="reveal">
+          <div class="eyebrow">Overview</div>
+          <h2 style="font-size:clamp(1.6rem,3vw,2.2rem); font-weight:650; letter-spacing:-0.01em; margin-bottom:20px;">
+            One warehouse, two messy source systems
+          </h2>
+          <div class="overview-text">
+            <p>
+              The scenario behind this project is a common one: a company runs a
+              <strong>CRM</strong> system for customer and sales data and a separate
+              <strong>ERP</strong> system for product and location data. Neither system
+              was designed to talk to the other, so before anyone can build a dashboard,
+              someone has to reconcile them — mismatched keys, inconsistent codes,
+              duplicate customer records, and sales figures that don't always add up.
+            </p>
+            <p>
+              I built this warehouse to do exactly that: pull the raw CSV exports in as-is,
+              clean and standardize them, and land them in a business-ready model that
+              a BI tool or an analyst can query directly, without needing to know anything
+              about the mess underneath.
+            </p>
+            <p>
+              Everything here runs on Microsoft SQL Server using plain T-SQL — no
+              orchestration platform, no external ETL tool. The goal was to show that the
+              fundamentals — clean SQL, a sound architecture, and rigorous testing — hold
+              up on their own.
+            </p>
+          </div>
+        </div>
+
+        <ul class="req-list reveal">
+          <li>
+            <span class="num">01</span>
+            <div>
+              <h4>Data Sources</h4>
+              <span class="d">Import raw CSV exports from two independent source systems — CRM and ERP.</span>
+            </div>
+          </li>
+          <li>
+            <span class="num">02</span>
+            <div>
+              <h4>Data Quality</h4>
+              <span class="d">Catch and resolve nulls, duplicates, inconsistent formats and invalid values before they reach reporting.</span>
+            </div>
+          </li>
+          <li>
+            <span class="num">03</span>
+            <div>
+              <h4>Integration</h4>
+              <span class="d">Reconcile mismatched keys and codes across systems into one coherent, analysis-ready model.</span>
+            </div>
+          </li>
+          <li>
+            <span class="num">04</span>
+            <div>
+              <h4>Analytics-Ready</h4>
+              <span class="d">Expose a star schema plus reporting views built specifically for customer, product and sales analysis.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== ARCHITECTURE ============================== -->
+  <section id="architecture" class="section section-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Architecture</div>
+        <h2>A Medallion architecture, kept honest</h2>
+        <p>Every layer has one job and a clear boundary. Nothing downstream ever reaches back past the layer right before it.</p>
+      </div>
+
+      <div class="arch-diagram reveal">
+        <svg viewBox="0 0 1040 220" role="img" aria-label="Data flows from CRM and ERP source files through Bronze, Silver and Gold layers into BI, ad-hoc SQL and reporting">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="var(--text-muted)"></path>
+            </marker>
+          </defs>
+          <style>
+            .arch-box { fill: var(--bg-raised); stroke: var(--border); stroke-width: 1; }
+            .arch-t { font-family: var(--font-mono); font-size: 13px; fill: var(--text); }
+            .arch-s { font-family: var(--font-sans); font-size: 11px; fill: var(--text-muted); }
+            .arch-line { stroke: var(--text-muted); stroke-width: 1.4; marker-end: url(#arrow); fill: none; }
+          </style>
+
+          <rect x="8" y="70" width="120" height="80" rx="10" class="arch-box"></rect>
+          <text x="68" y="100" text-anchor="middle" class="arch-t">Sources</text>
+          <text x="68" y="120" text-anchor="middle" class="arch-s">CRM CSV</text>
+          <text x="68" y="135" text-anchor="middle" class="arch-s">ERP CSV</text>
+
+          <path class="arch-line" d="M128,110 H196"></path>
+
+          <rect x="200" y="40" width="160" height="140" rx="10" class="arch-box" style="stroke:#b8763f"></rect>
+          <text x="280" y="68" text-anchor="middle" class="arch-t">Bronze</text>
+          <text x="280" y="92" text-anchor="middle" class="arch-s">Raw, as-is</text>
+          <text x="280" y="108" text-anchor="middle" class="arch-s">BULK INSERT</text>
+          <text x="280" y="124" text-anchor="middle" class="arch-s">Full load,</text>
+          <text x="280" y="140" text-anchor="middle" class="arch-s">truncate + insert</text>
+          <text x="280" y="160" text-anchor="middle" class="arch-s">No transformation</text>
+
+          <path class="arch-line" d="M360,110 H428"></path>
+
+          <rect x="432" y="40" width="160" height="140" rx="10" class="arch-box" style="stroke:#9a978d"></rect>
+          <text x="512" y="68" text-anchor="middle" class="arch-t">Silver</text>
+          <text x="512" y="92" text-anchor="middle" class="arch-s">Cleansed +</text>
+          <text x="512" y="108" text-anchor="middle" class="arch-s">standardized</text>
+          <text x="512" y="124" text-anchor="middle" class="arch-s">Dedup, type-safe</text>
+          <text x="512" y="140" text-anchor="middle" class="arch-s">dates, repaired</text>
+          <text x="512" y="156" text-anchor="middle" class="arch-s">measures</text>
+
+          <path class="arch-line" d="M592,110 H660"></path>
+
+          <rect x="664" y="40" width="160" height="140" rx="10" class="arch-box" style="stroke:#c99a2e"></rect>
+          <text x="744" y="68" text-anchor="middle" class="arch-t">Gold</text>
+          <text x="744" y="92" text-anchor="middle" class="arch-s">Business-ready</text>
+          <text x="744" y="108" text-anchor="middle" class="arch-s">Star schema views</text>
+          <text x="744" y="124" text-anchor="middle" class="arch-s">dim_customers</text>
+          <text x="744" y="140" text-anchor="middle" class="arch-s">dim_products</text>
+          <text x="744" y="156" text-anchor="middle" class="arch-s">fact_sales</text>
+
+          <path class="arch-line" d="M824,110 H892"></path>
+
+          <rect x="896" y="20" width="136" height="42" rx="8" class="arch-box"></rect>
+          <text x="964" y="46" text-anchor="middle" class="arch-s">BI &amp; Dashboards</text>
+
+          <rect x="896" y="90" width="136" height="42" rx="8" class="arch-box"></rect>
+          <text x="964" y="116" text-anchor="middle" class="arch-s">Ad-hoc SQL</text>
+
+          <rect x="896" y="158" width="136" height="42" rx="8" class="arch-box"></rect>
+          <text x="964" y="184" text-anchor="middle" class="arch-s">Customer / product reports</text>
+        </svg>
+      </div>
+
+      <div class="layer-cards">
+        <div class="layer-card reveal">
+          <span class="tag tag-bronze">Bronze</span>
+          <h3>Raw ingestion</h3>
+          <p>Six source tables loaded byte-for-byte from CSV via <code>BULK INSERT</code>, wrapped in a single stored procedure with per-table timing and a full truncate-and-reload on every run. No transformation happens here on purpose — Bronze is the audit trail.</p>
+          <code class="pill">bronze.load_bronze</code>
+          <code class="pill">TRY / CATCH</code>
+        </div>
+        <div class="layer-card reveal">
+          <span class="tag tag-silver">Silver</span>
+          <h3>Cleansed &amp; conformed</h3>
+          <p>Deduplication with deterministic tie-breaking, type-safe date parsing, standardized codes (gender, marital status, country, product line), and self-healing sales figures — all inside one transaction that rolls back completely on failure.</p>
+          <code class="pill">silver.load_silver</code>
+          <code class="pill">ROW_NUMBER()</code>
+          <code class="pill">TRY_CONVERT</code>
+        </div>
+        <div class="layer-card reveal">
+          <span class="tag tag-gold">Gold</span>
+          <h3>Business-ready</h3>
+          <p>A star schema exposed as views — two dimensions and one fact — plus two reporting views built for customer and product analysis. This is the only layer any report or query is meant to touch.</p>
+          <code class="pill">gold.dim_customers</code>
+          <code class="pill">gold.fact_sales</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== DATA MODEL ============================== -->
+  <section id="data-model" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Data Model</div>
+        <h2>A star schema built around one grain</h2>
+        <p>One row per sales order line. Two dimensions. Every foreign key resolves to something — even when the source data doesn't cooperate.</p>
+      </div>
+
+      <div class="model-diagram reveal">
+        <svg viewBox="0 0 900 320" role="img" aria-label="Star schema: gold.dim_customers and gold.dim_products connect to gold.fact_sales on customer_key and product_key">
+          <style>
+            .m-box { fill: var(--bg-raised); stroke: var(--border); stroke-width: 1; }
+            .m-head { font-family: var(--font-mono); font-weight: 600; font-size: 13px; fill: var(--text); }
+            .m-col { font-family: var(--font-mono); font-size: 11px; fill: var(--text-muted); }
+            .m-key { font-family: var(--font-mono); font-size: 11px; fill: var(--accent-strong); font-weight: 600; }
+            .m-line { stroke: var(--text-muted); stroke-width: 1.2; fill: none; }
+          </style>
+
+          <!-- dim_customers -->
+          <rect x="20" y="30" width="230" height="230" rx="10" class="m-box" style="stroke:#c99a2e"></rect>
+          <rect x="20" y="30" width="230" height="34" rx="10" fill="var(--accent-soft)"></rect>
+          <text x="34" y="52" class="m-head">gold.dim_customers</text>
+          <text x="34" y="80" class="m-key">PK customer_key</text>
+          <text x="34" y="100" class="m-col">customer_id</text>
+          <text x="34" y="118" class="m-col">customer_number</text>
+          <text x="34" y="136" class="m-col">first_name / last_name</text>
+          <text x="34" y="154" class="m-col">country</text>
+          <text x="34" y="172" class="m-col">marital_status</text>
+          <text x="34" y="190" class="m-col">gender</text>
+          <text x="34" y="208" class="m-col">birthdate</text>
+          <text x="34" y="226" class="m-col">create_date</text>
+          <text x="34" y="248" class="m-col" font-style="italic">key = -1 → Unknown Customer</text>
+
+          <!-- fact_sales -->
+          <rect x="335" y="60" width="230" height="180" rx="10" class="m-box" style="stroke:#9a978d"></rect>
+          <rect x="335" y="60" width="230" height="34" rx="10" fill="var(--border)"></rect>
+          <text x="349" y="82" class="m-head">gold.fact_sales</text>
+          <text x="349" y="110" class="m-col">order_number</text>
+          <text x="349" y="128" class="m-key">FK customer_key</text>
+          <text x="349" y="146" class="m-key">FK product_key</text>
+          <text x="349" y="164" class="m-col">order / ship / due date</text>
+          <text x="349" y="182" class="m-col">sales_amount</text>
+          <text x="349" y="200" class="m-col">quantity, price</text>
+          <text x="349" y="222" class="m-col" font-style="italic">grain: 1 row / order line</text>
+
+          <!-- dim_products -->
+          <rect x="650" y="30" width="230" height="230" rx="10" class="m-box" style="stroke:#c99a2e"></rect>
+          <rect x="650" y="30" width="230" height="34" rx="10" fill="var(--accent-soft)"></rect>
+          <text x="664" y="52" class="m-head">gold.dim_products</text>
+          <text x="664" y="80" class="m-key">PK product_key</text>
+          <text x="664" y="100" class="m-col">product_number</text>
+          <text x="664" y="118" class="m-col">product_name</text>
+          <text x="664" y="136" class="m-col">category / subcategory</text>
+          <text x="664" y="154" class="m-col">maintenance</text>
+          <text x="664" y="172" class="m-col">cost</text>
+          <text x="664" y="190" class="m-col">product_line</text>
+          <text x="664" y="208" class="m-col">start_date / end_date</text>
+          <text x="664" y="230" class="m-col" font-style="italic">current version only</text>
+
+          <path class="m-line" d="M250,145 H335"></path>
+          <path class="m-line" d="M565,145 H650"></path>
+        </svg>
+      </div>
+
+      <div class="model-notes">
+        <div class="note reveal">
+          <h4>Why a star, not a snowflake</h4>
+          <p>Two dimensions and one fact don't justify normalizing further. A star schema keeps every report a single join away and matches how BI tools expect to consume data.</p>
+        </div>
+        <div class="note reveal">
+          <h4>Unknown-member rows</h4>
+          <p>Sales that can't be matched to a customer or product don't get dropped or left with a null key — they resolve to an explicit key of <code>-1</code>, so nothing in the fact table is ever silently unjoinable.</p>
+        </div>
+        <div class="note reveal">
+          <h4>History where it matters</h4>
+          <p>Product versions are tracked with start/end dates derived from the source data itself, so Gold always resolves to the currently active version without losing that history in Silver.</p>
+        </div>
+      </div>
+
+      <p class="reveal" style="margin-top:32px; color:var(--text-muted); font-size:0.92rem;">
+        The full design reasoning — grain, key strategy, and the SCD tradeoffs behind it — is written up in
+        <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project/blob/main/docs/data_model.md" target="_blank" rel="noopener" style="color:var(--accent-strong); text-decoration:underline;">docs/data_model.md</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================== ENGINEERING ============================== -->
+  <section id="engineering" class="section section-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Engineering Details</div>
+        <h2>The parts that don't show up in a diagram</h2>
+        <p>A handful of real decisions from the codebase — the kind of thing that separates a warehouse that looks right from one that actually is.</p>
+      </div>
+
+      <div class="eng-grid">
+        <div class="eng-card reveal">
+          <h3>Deterministic deduplication <span class="ix">silver.load_silver</span></h3>
+          <p>Duplicate customer records are ranked by recency, then by how complete the record is, so re-running the load always keeps the same row — not whichever one happened to load first.</p>
+          <pre class="code"><span class="kw">ROW_NUMBER</span>() <span class="kw">OVER</span> (
+    <span class="kw">PARTITION BY</span> cst_id
+    <span class="kw">ORDER BY</span>
+        cst_create_date <span class="kw">DESC</span>,
+        completeness_score <span class="kw">DESC</span>,
+        cst_key_clean <span class="kw">DESC</span>
+) <span class="kw">AS</span> row_number
+<span class="cm">-- keep only row_number = 1 per customer</span></pre>
+        </div>
+
+        <div class="eng-card reveal">
+          <h3>Self-healing measures <span class="ix">silver.load_silver</span></h3>
+          <p>When sales, price and quantity don't agree, price and sales are recalculated from each other instead of trusting a possibly-corrupt source value, within a small tolerance for rounding.</p>
+          <pre class="code"><span class="kw">CASE</span>
+    <span class="kw">WHEN</span> raw_sales <span class="kw">IS NULL</span> <span class="kw">OR</span> raw_sales &lt;= 0
+        <span class="kw">THEN</span> raw_quantity * corrected_price
+    <span class="kw">WHEN</span> <span class="fn">ABS</span>(raw_sales - (raw_quantity * corrected_price)) > 0.01
+        <span class="kw">THEN</span> raw_quantity * corrected_price
+    <span class="kw">ELSE</span> raw_sales
+<span class="kw">END</span></pre>
+        </div>
+
+        <div class="eng-card reveal">
+          <h3>Version history from raw data <span class="ix">silver.load_silver</span></h3>
+          <p>The source system only tells you when a product version starts. <code>LEAD()</code> derives when it ends — one day before the next version begins — without a second source of truth.</p>
+          <pre class="code"><span class="kw">LEAD</span>(product_start_date) <span class="kw">OVER</span> (
+    <span class="kw">PARTITION BY</span> original_prd_key
+    <span class="kw">ORDER BY</span> product_start_date, prd_id
+) <span class="kw">AS</span> next_product_start_date
+<span class="cm">-- end_date = DATEADD(DAY, -1, next_start_date)</span></pre>
+        </div>
+
+        <div class="eng-card reveal">
+          <h3>No orphaned facts <span class="ix">gold.dim_customers</span></h3>
+          <p>Every dimension carries an explicit "Unknown" member with key <code>-1</code>. A sale that can't be matched to a real customer still lands somewhere countable, instead of vanishing from totals.</p>
+          <pre class="code"><span class="kw">SELECT</span> <span class="fn">CAST</span>(-1 <span class="kw">AS</span> BIGINT) <span class="kw">AS</span> customer_key,
+    <span class="kw">NULL</span> <span class="kw">AS</span> customer_id,
+    <span class="st">'UNKNOWN'</span> <span class="kw">AS</span> customer_number,
+    <span class="st">'Unknown Customer'</span> <span class="kw">AS</span> customer_name
+<span class="cm">-- unioned into the dimension view</span></pre>
+        </div>
+
+        <div class="eng-card reveal">
+          <h3>All-or-nothing loads <span class="ix">silver.load_silver</span></h3>
+          <p>The entire Silver load runs inside one transaction. If any of the six tables fails, everything rolls back — no partial refresh where some tables are current and others are stale.</p>
+          <pre class="code"><span class="kw">SET</span> XACT_ABORT <span class="kw">ON</span>;
+<span class="kw">BEGIN TRANSACTION</span>;
+<span class="cm">-- ...six table loads...</span>
+<span class="kw">COMMIT TRANSACTION</span>;
+<span class="cm">-- CATCH block: IF XACT_STATE() &lt;&gt; 0 ROLLBACK TRANSACTION;</span></pre>
+        </div>
+
+        <div class="eng-card reveal">
+          <h3>Source-priority merge logic <span class="ix">gold.dim_customers</span></h3>
+          <p>Customer gender exists in both CRM and ERP and they don't always agree. CRM wins when it has a value — it's the system closer to the actual sales relationship — ERP fills the gaps.</p>
+          <pre class="code"><span class="kw">COALESCE</span>(
+    <span class="fn">NULLIF</span>(ci.cst_gndr, <span class="st">'n/a'</span>),
+    <span class="fn">NULLIF</span>(ca.gen, <span class="st">'n/a'</span>),
+    <span class="st">'n/a'</span>
+) <span class="kw">AS</span> gender</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== ANALYTICS ============================== -->
+  <section id="analytics" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Analytics</div>
+        <h2>What the model is actually for</h2>
+        <p>A dimensional model is only as good as what you can ask of it. These are the analysis patterns built on top of the Gold layer.</p>
+      </div>
+
+      <div class="analytics-grid">
+        <div class="mini-card reveal">
+          <h4>Change over time</h4>
+          <p>Monthly and yearly sales trends to spot seasonality and growth, not just totals.</p>
+        </div>
+        <div class="mini-card reveal">
+          <h4>Cumulative analysis</h4>
+          <p>Running totals and moving averages to track momentum across the order history.</p>
+        </div>
+        <div class="mini-card reveal">
+          <h4>Performance analysis</h4>
+          <p>Year-over-year product performance against its own average and prior-year baseline.</p>
+        </div>
+        <div class="mini-card reveal">
+          <h4>Part-to-whole</h4>
+          <p>Which product categories actually drive revenue, as a share of total sales.</p>
+        </div>
+        <div class="mini-card reveal">
+          <h4>Magnitude &amp; ranking</h4>
+          <p>Top and bottom performers by revenue, quantity and customer count.</p>
+        </div>
+        <div class="mini-card reveal">
+          <h4>Segmentation</h4>
+          <p>Customers and products grouped into VIP / Regular / New and cost-based tiers.</p>
+        </div>
+      </div>
+
+      <div class="reports-callout">
+        <div class="report-card reveal">
+          <h4>gold.report_customers</h4>
+          <p>One row per customer: lifespan, recency, order count, total spend, average order value and a VIP / Regular / New segment — the kind of view a CRM or retention dashboard would sit directly on top of.</p>
+          <ul>
+            <li>recency</li><li>avg_order_value</li><li>avg_monthly_spend</li><li>customer_segment</li>
+          </ul>
+        </div>
+        <div class="report-card reveal">
+          <h4>gold.report_products</h4>
+          <p>One row per product: total revenue, units sold, unique customers reached, and a High / Mid / Low performance tier based on lifetime sales.</p>
+          <ul>
+            <li>avg_order_revenue</li><li>avg_monthly_revenue</li><li>product_segment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== EXPLORE THE REPO ============================== -->
+  <section id="explore" class="section section-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Explore The Repo</div>
+        <h2>Everything is there to read</h2>
+        <p>No slide deck required — the SQL, the tests and the docs are the whole story.</p>
+      </div>
+
+      <div class="explore-grid">
+        <div class="explore-card reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
+          <h4>scripts/</h4>
+          <p>DDL and stored procedures for all three layers — bronze, silver, gold.</p>
+          <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project/tree/main/scripts" target="_blank" rel="noopener">Browse →</a>
+        </div>
+        <div class="explore-card reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 12l2 2 4-4M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"/></svg>
+          <h4>tests/</h4>
+          <p>Referential-integrity and data-quality checks for the Silver and Gold layers.</p>
+          <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project/tree/main/tests" target="_blank" rel="noopener">Browse →</a>
+        </div>
+        <div class="explore-card reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 19V6a2 2 0 0 1 2-2h7l5 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M13 4v5h5"/></svg>
+          <h4>docs/</h4>
+          <p>Data catalog, naming conventions, and the data-model design writeup.</p>
+          <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project/tree/main/docs" target="_blank" rel="noopener">Browse →</a>
+        </div>
+        <div class="explore-card reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 3v18h18M7 15l4-6 4 4 4-8"/></svg>
+          <h4>exploratory data analysis/</h4>
+          <p>Every analysis pattern above as a standalone, runnable SQL script.</p>
+          <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project/tree/main/exploratory%20data%20analysis" target="_blank" rel="noopener">Browse →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== CTA ============================== -->
+  <section class="cta">
+    <div class="container">
+      <div class="eyebrow reveal" style="justify-content:center;">Let's talk</div>
+      <h2 class="reveal">Looking for a data engineer who cares about the details.</h2>
+      <p class="reveal">I'm open to data engineering and analytics engineering roles. If you want to talk about this project, or anything else, my inbox is open.</p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary" href="mailto:sentongopol@gmail.com">Email me</a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/paul-sentongo-885041284/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        <a class="btn btn-secondary" href="https://github.com/sentongo-web" target="_blank" rel="noopener">See my GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span class="footer-note">© <span id="year">2026</span> Paul Sentongo. Built with plain HTML, CSS and JS.</span>
+    <div class="footer-links">
+      <a href="mailto:sentongopol@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg>
+        Email
+      </a>
+      <a href="https://www.linkedin.com/in/paul-sentongo-885041284/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.5 4.78 5.8V21h-4v-5.8c0-1.4 0-3.2-1.95-3.2-1.95 0-2.25 1.5-2.25 3.1V21h-4V9Z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55v-2.1c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.12 3.05.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
