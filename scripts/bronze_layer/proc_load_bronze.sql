@@ -14,6 +14,12 @@ Parameters:
 
 Usage Example:
     EXEC bronze.load_bronze;
+
+Note:
+    BULK INSERT reads files from the SQL Server host's own file system, not
+    from wherever this script is run. Update the file paths below to match
+    where you clone this repository on the machine running SQL Server before
+    executing this procedure.
 ===============================================================================
 */
 USE DataWarehouse;
@@ -57,7 +63,7 @@ BEGIN
         PRINT '>> Loading: cust_info.csv';
 
         BULK INSERT bronze.crm_cust_info
-        FROM 'D:\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_crm\cust_info.csv'
+        FROM 'D:\SQL_datawarehouse_Project\datasets\source_data_crm\cust_info.csv'
         WITH
         (
             FORMAT = 'CSV',
@@ -89,7 +95,7 @@ BEGIN
         PRINT '>> Loading: prd_info.csv';
 
         BULK INSERT bronze.crm_prd_info
-        FROM 'D:\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_crm\prd_info.csv'
+        FROM 'D:\SQL_datawarehouse_Project\datasets\source_data_crm\prd_info.csv'
         WITH
         (
             FORMAT = 'CSV',
@@ -121,7 +127,7 @@ BEGIN
         PRINT '>> Loading: sales_details.csv';
 
         BULK INSERT bronze.crm_sales_details
-        FROM 'D:\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_crm\sales_details.csv'
+        FROM 'D:\SQL_datawarehouse_Project\datasets\source_data_crm\sales_details.csv'
         WITH
         (
             FORMAT = 'CSV',
@@ -160,7 +166,7 @@ BEGIN
         PRINT '>> Loading: LOC_A101.csv';
 
         BULK INSERT bronze.erp_loc_a101
-        FROM 'D:\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_erp\LOC_A101.csv'
+        FROM 'D:\SQL_datawarehouse_Project\datasets\source_data_erp\LOC_A101.csv'
         WITH
         (
             FORMAT = 'CSV',
@@ -192,7 +198,7 @@ BEGIN
         PRINT '>> Loading: CUST_AZ12.csv';
 
         BULK INSERT bronze.erp_cust_az12
-        FROM 'D:\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_erp\CUST_AZ12.csv'
+        FROM 'D:\SQL_datawarehouse_Project\datasets\source_data_erp\CUST_AZ12.csv'
         WITH
         (
             FORMAT = 'CSV',
@@ -224,7 +230,7 @@ BEGIN
         PRINT '>> Loading: PX_CAT_G1V2.csv';
 
         BULK INSERT bronze.erp_px_cat_g1v2
-        FROM 'D:\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_erp\PX_CAT_G1V2.csv'
+        FROM 'D:\SQL_datawarehouse_Project\datasets\source_data_erp\PX_CAT_G1V2.csv'
         WITH
         (
             FORMAT = 'CSV',

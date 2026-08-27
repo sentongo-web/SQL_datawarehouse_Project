@@ -1132,6 +1132,3 @@ EXECUTE THE SILVER LOAD
 
 EXEC silver.load_silver;
 GO
-
---checks
-SELECT * FROM silver.crm_cust_info

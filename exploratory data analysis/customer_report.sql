@@ -53,7 +53,7 @@ WHERE order_date IS NOT NULL)
 /*---------------------------------------------------------------------------
 2) Customer Aggregations: Summarizes key metrics at the customer level
 ---------------------------------------------------------------------------*/
-SELECT 
+SELECT
 	customer_key,
 	customer_number,
 	customer_name,
@@ -65,7 +65,7 @@ SELECT
 	MAX(order_date) AS last_order_date,
 	DATEDIFF(month, MIN(order_date), MAX(order_date)) AS lifespan
 FROM base_query
-GROUP BY 
+GROUP BY
 	customer_key,
 	customer_number,
 	customer_name,
@@ -76,44 +76,14 @@ customer_key,
 customer_number,
 customer_name,
 age,
-CASE 
-	 WHEN age < 20 THEN/*
-===============================================================================
-Part-to-Whole Analysis
-===============================================================================
-Purpose:
-    - To compare performance or metrics across dimensions or time periods.
-    - To evaluate differences between categories.
-    - Useful for A/B testing or regional comparisons.
-
-SQL Functions Used:
-    - SUM(), AVG(): Aggregates values for comparison.
-    - Window Functions: SUM() OVER() for total calculations.
-===============================================================================
-*/
--- Which categories contribute the most to overall sales?
-WITH category_sales AS (
-    SELECT
-        p.category,
-        SUM(f.sales_amount) AS total_sales
-    FROM gold.fact_sales f
-    LEFT JOIN gold.dim_products p
-        ON p.product_key = f.product_key
-    GROUP BY p.category
-)
-SELECT
-    category,
-    total_sales,
-    SUM(total_sales) OVER () AS overall_sales,
-    ROUND((CAST(total_sales AS FLOAT) / SUM(total_sales) OVER ()) * 100, 2) AS percentage_of_total
-FROM category_sales
-ORDER BY total_sales DESC; 'Under 20'
+CASE
+	 WHEN age < 20 THEN 'Under 20'
 	 WHEN age between 20 and 29 THEN '20-29'
 	 WHEN age between 30 and 39 THEN '30-39'
 	 WHEN age between 40 and 49 THEN '40-49'
 	 ELSE '50 and above'
 END AS age_group,
-CASE 
+CASE
     WHEN lifespan >= 12 AND total_sales > 5000 THEN 'VIP'
     WHEN lifespan >= 12 AND total_sales <= 5000 THEN 'Regular'
     ELSE 'New'
@@ -123,7 +93,7 @@ DATEDIFF(month, last_order_date, GETDATE()) AS recency,
 total_orders,
 total_sales,
 total_quantity,
-total_products
+total_products,
 lifespan,
 -- Compuate average order value (AVO)
 CASE WHEN total_sales = 0 THEN 0
