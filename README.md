@@ -79,7 +79,7 @@ The `exploratory data analysis/` folder covers change-over-time trends, cumulati
 ## Contact
 
 **Paul Sentongo**
-[paulsentongo.dev](https://paulsentongo.dev) · [sentongopol@gmail.com](mailto:sentongopol@gmail.com) · [LinkedIn](https://www.linkedin.com/in/paul-sentongo-885041284/)
+[Project Link(https://sentongo-web.github.io/SQL_datawarehouse_Project/#explore) · [sentongopol@gmail.com](mailto:sentongopol@gmail.com) · [LinkedIn](https://www.linkedin.com/in/paul-sentongo-885041284/)
 
 ## License
 
