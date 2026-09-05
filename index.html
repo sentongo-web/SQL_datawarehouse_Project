@@ -385,7 +385,7 @@
       <div class="eng-grid">
         <div class="eng-card reveal">
           <h3>Deterministic deduplication <span class="ix">silver.load_silver</span></h3>
-          <p>Duplicate customer records are ranked by recency, then by how complete the record is, so re-running the load always keeps the same row — not whichever one happened to load first.</p>
+          <p>Duplicate customer records are ranked by recency, then by how complete the record is, so re-running the load always keeps the same row and not whichever one happened to load first.</p>
           <pre class="code"><span class="kw">ROW_NUMBER</span>() <span class="kw">OVER</span> (
     <span class="kw">PARTITION BY</span> cst_id
     <span class="kw">ORDER BY</span>
@@ -398,7 +398,7 @@
 
         <div class="eng-card reveal">
           <h3>Self-healing measures <span class="ix">silver.load_silver</span></h3>
-          <p>When sales, price and quantity don't agree, price and sales are recalculated from each other instead of trusting a possibly-corrupt source value, within a small tolerance for rounding.</p>
+          <p>When sales, price and quantity don't agree, price and sales are recalculated from each other instead of trusting a possibly corrupt source value, within a small tolerance for rounding.</p>
           <pre class="code"><span class="kw">CASE</span>
     <span class="kw">WHEN</span> raw_sales <span class="kw">IS NULL</span> <span class="kw">OR</span> raw_sales &lt;= 0
         <span class="kw">THEN</span> raw_quantity * corrected_price
@@ -410,7 +410,7 @@
 
         <div class="eng-card reveal">
           <h3>Version history from raw data <span class="ix">silver.load_silver</span></h3>
-          <p>The source system only tells you when a product version starts. <code>LEAD()</code> derives when it ends — one day before the next version begins — without a second source of truth.</p>
+          <p>The source system only tells you when a product version starts. <code>LEAD()</code> derives when it ends one day before the next version begins without a second source of truth.</p>
           <pre class="code"><span class="kw">LEAD</span>(product_start_date) <span class="kw">OVER</span> (
     <span class="kw">PARTITION BY</span> original_prd_key
     <span class="kw">ORDER BY</span> product_start_date, prd_id
@@ -430,7 +430,7 @@
 
         <div class="eng-card reveal">
           <h3>All-or-nothing loads <span class="ix">silver.load_silver</span></h3>
-          <p>The entire Silver load runs inside one transaction. If any of the six tables fails, everything rolls back — no partial refresh where some tables are current and others are stale.</p>
+          <p>The entire Silver load runs inside one transaction. If any of the six tables fails, everything rolls back without partial refresh where some tables are current and others are stale.</p>
           <pre class="code"><span class="kw">SET</span> XACT_ABORT <span class="kw">ON</span>;
 <span class="kw">BEGIN TRANSACTION</span>;
 <span class="cm">-- ...six table loads...</span>
@@ -440,7 +440,7 @@
 
         <div class="eng-card reveal">
           <h3>Source-priority merge logic <span class="ix">gold.dim_customers</span></h3>
-          <p>Customer gender exists in both CRM and ERP and they don't always agree. CRM wins when it has a value — it's the system closer to the actual sales relationship — ERP fills the gaps.</p>
+          <p>Customer gender exists in both CRM and ERP and they don't always agree. CRM wins when it has a value because it's the system closer to the actual sales relationship while ERP fills the gaps.</p>
           <pre class="code"><span class="kw">COALESCE</span>(
     <span class="fn">NULLIF</span>(ci.cst_gndr, <span class="st">'n/a'</span>),
     <span class="fn">NULLIF</span>(ca.gen, <span class="st">'n/a'</span>),
@@ -562,7 +562,7 @@
 
 <footer>
   <div class="container footer-inner">
-    <span class="footer-note">© <span id="year">2026</span> Paul Sentongo. Built with plain HTML, CSS and JS.</span>
+    <span class="footer-note">© <span id="year">2026</span> Paul Sentongo. </span>
     <div class="footer-links">
       <a href="mailto:sentongopol@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg>
