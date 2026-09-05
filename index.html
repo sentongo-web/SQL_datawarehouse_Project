@@ -263,14 +263,14 @@
         <div class="layer-card reveal">
           <span class="tag tag-bronze">Bronze</span>
           <h3>Raw ingestion</h3>
-          <p>Six source tables loaded byte-for-byte from CSV via <code>BULK INSERT</code>, wrapped in a single stored procedure with per-table timing and a full truncate-and-reload on every run. No transformation happens here on purpose — Bronze is the audit trail.</p>
+          <p>Six source tables loaded byte-for-byte from CSV via <code>BULK INSERT</code>, wrapped in a single stored procedure with per-table timing and a full truncate-and-reload on every run. No transformation happens here on purpose since the Bronze layer is the audit trail.</p>
           <code class="pill">bronze.load_bronze</code>
           <code class="pill">TRY / CATCH</code>
         </div>
         <div class="layer-card reveal">
           <span class="tag tag-silver">Silver</span>
           <h3>Cleansed &amp; conformed</h3>
-          <p>Deduplication with deterministic tie-breaking, type-safe date parsing, standardized codes (gender, marital status, country, product line), and self-healing sales figures — all inside one transaction that rolls back completely on failure.</p>
+          <p>Deduplication with deterministic tie-breaking, type-safe date parsing, standardized codes (gender, marital status, country, product line), and self-healing sales figures all inside one transaction that rolls back completely on failure.</p>
           <code class="pill">silver.load_silver</code>
           <code class="pill">ROW_NUMBER()</code>
           <code class="pill">TRY_CONVERT</code>
@@ -278,7 +278,7 @@
         <div class="layer-card reveal">
           <span class="tag tag-gold">Gold</span>
           <h3>Business-ready</h3>
-          <p>A star schema exposed as views — two dimensions and one fact — plus two reporting views built for customer and product analysis. This is the only layer any report or query is meant to touch.</p>
+          <p>A star schema exposed as views — two dimensions and one fact plus two reporting views built for customer and product analysis. This is the only layer any report or query is meant to touch.</p>
           <code class="pill">gold.dim_customers</code>
           <code class="pill">gold.fact_sales</code>
         </div>
@@ -358,7 +358,7 @@
         </div>
         <div class="note reveal">
           <h4>Unknown-member rows</h4>
-          <p>Sales that can't be matched to a customer or product don't get dropped or left with a null key — they resolve to an explicit key of <code>-1</code>, so nothing in the fact table is ever silently unjoinable.</p>
+          <p>Sales that can't be matched to a customer or product don't get dropped or left with a null key, they resolve to an explicit key of <code>-1</code>, so nothing in the fact table is ever silently unjoinable.</p>
         </div>
         <div class="note reveal">
           <h4>History where it matters</h4>
