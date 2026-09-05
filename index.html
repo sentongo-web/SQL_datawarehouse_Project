@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Paul Sentongo — Data Engineer</title>
+<title>Paul Sentongo SQL DWH</title>
 <meta name="description" content="A SQL Server data warehouse built from scratch: CRM and ERP data consolidated through a Bronze/Silver/Gold pipeline into a star schema, with data quality tests and analytics on top. Portfolio project by Paul Sentongo." />
 <meta name="theme-color" content="#faf9f6" />
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Paul Sentongo — Data Engineer" />
+<meta property="og:title" content="Paul Sentongo SQL DWH" />
 <meta property="og:description" content="A SQL Server data warehouse built with a Bronze/Silver/Gold medallion architecture: ETL, dimensional modeling, data quality checks and analytics, end to end." />
 <meta property="og:url" content="https://paulsentongo.dev" />
 <meta name="twitter:card" content="summary" />
@@ -75,7 +75,7 @@
         This is a SQL Server data warehouse I built end to end: raw CSV exports from two
         disconnected source systems, cleaned and reconciled through a Bronze → Silver → Gold
         pipeline, and modeled into a star schema ready for reporting. No frameworks, no
-        shortcuts — just T-SQL, a clear architecture, and a lot of attention to the details
+        shortcuts. Just T-SQL, a clear architecture, and a lot of attention to the details
         that make a warehouse trustworthy.
       </p>
       <div class="hero-actions reveal">
@@ -112,7 +112,7 @@
       </div>
       <div class="stat">
         <span class="n">3</span>
-        <span class="l">Layers — Bronze, Silver, Gold — each with a clear contract</span>
+        <span class="l">Layers: Bronze, Silver and Gold, each with a clear contract</span>
       </div>
       <div class="stat">
         <span class="n">18K+</span>
@@ -136,7 +136,7 @@
               <strong>CRM</strong> system for customer and sales data and a separate
               <strong>ERP</strong> system for product and location data. Neither system
               was designed to talk to the other, so before anyone can build a dashboard,
-              someone has to reconcile them — mismatched keys, inconsistent codes,
+              someone has to reconcile them. The mismatched keys, inconsistent codes,
               duplicate customer records, and sales figures that don't always add up.
             </p>
             <p>
@@ -146,9 +146,9 @@
               about the mess underneath.
             </p>
             <p>
-              Everything here runs on Microsoft SQL Server using plain T-SQL — no
+              Everything here runs on Microsoft SQL Server using plain T-SQL  no
               orchestration platform, no external ETL tool. The goal was to show that the
-              fundamentals — clean SQL, a sound architecture, and rigorous testing — hold
+              fundamentals, clean SQL, a sound architecture, and rigorous testing hold
               up on their own.
             </p>
           </div>
@@ -159,7 +159,7 @@
             <span class="num">01</span>
             <div>
               <h4>Data Sources</h4>
-              <span class="d">Import raw CSV exports from two independent source systems — CRM and ERP.</span>
+              <span class="d">Import raw CSV exports from two independent source systems that is the CRM and ERP.</span>
             </div>
           </li>
           <li>
@@ -367,7 +367,7 @@
       </div>
 
       <p class="reveal" style="margin-top:32px; color:var(--text-muted); font-size:0.92rem;">
-        The full design reasoning — grain, key strategy, and the SCD tradeoffs behind it — is written up in
+        The full design reasoning, grain, key strategy, and the SCD tradeoffs behind it is written up in
         <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project/blob/main/docs/data_model.md" target="_blank" rel="noopener" style="color:var(--accent-strong); text-decoration:underline;">docs/data_model.md</a>.
       </p>
     </div>
@@ -379,7 +379,7 @@
       <div class="section-head reveal">
         <div class="eyebrow">Engineering Details</div>
         <h2>The parts that don't show up in a diagram</h2>
-        <p>A handful of real decisions from the codebase — the kind of thing that separates a warehouse that looks right from one that actually is.</p>
+        <p>A handful of real decisions from the codebase which is the kind of thing that separates a warehouse that looks right from one that actually is.</p>
       </div>
 
       <div class="eng-grid">
@@ -519,13 +519,13 @@
         <div class="explore-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
           <h4>scripts/</h4>
-          <p>DDL and stored procedures for all three layers — bronze, silver, gold.</p>
+          <p>DDL and stored procedures for all three layers i.e bronze, silver, gold.</p>
           <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project/tree/main/scripts" target="_blank" rel="noopener">Browse →</a>
         </div>
         <div class="explore-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 12l2 2 4-4M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"/></svg>
           <h4>tests/</h4>
-          <p>Referential-integrity and data-quality checks for the Silver and Gold layers.</p>
+          <p>Integrity and data-quality checks for the Silver and Gold layers.</p>
           <a href="https://github.com/sentongo-web/SQL_datawarehouse_Project/tree/main/tests" target="_blank" rel="noopener">Browse →</a>
         </div>
         <div class="explore-card reveal">
